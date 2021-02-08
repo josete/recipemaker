@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
 import { Button, Modal, Icon, Input, Select, Grid } from 'semantic-ui-react'
+import $ from "jquery";
 
-export default class Ingredients extends Component {
-    state = {}
+export default class ModalIndredients extends Component {
+    state = {unit:""}
     close = (e) => {
         this.props.close();
     }
     addClick = (e) =>{
-        var qty = document.getElementById("qty").value;
-        var units = document.getElementById("units");
-        var ingredient = document.getElementById("ingredient").value;
+        var qty = $("#qty").val();
+        var units = this.state.unit;
+        var ingredient = $("#ingredient").val();
         this.props.addIngredient(e,qty,units,ingredient);
+        $("#qty").val("");
+        $("#ingredient").val("");
+    }
+    onChange = (e, { name, value }) => {
+        this.setState({unit:value})
     }
     render() {
         const options = [
-            { key: 'g', text: 'g', value: 'g' }
+            { key: 'gramos', text: 'gramos', value: 'gramos' }
         ]
         return (<Modal id="registro" open={this.props.open} onClose={this.close} closeIcon closeOnDimmerClick>
             <Modal.Header>Ingrediente</Modal.Header>
@@ -25,7 +31,7 @@ export default class Ingredients extends Component {
                             <Input fluid placeholder='Cantidad' id="qty" />
                         </Grid.Column>
                         <Grid.Column width={3}>
-                            <Select fluid options={options} placeholder="Unidades" id="units" />
+                            <Select fluid options={options} onChange={this.onChange} placeholder="Unidades" id="units" />
                         </Grid.Column>
                         <Grid.Column width={10}>
                             <Input fluid placeholder='Ingrediente' id="ingredient" />

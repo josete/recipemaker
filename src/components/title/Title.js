@@ -7,7 +7,7 @@ export default class Title extends Component {
   render() {
     return (<div>
         <Header as='h1'>Titulo</Header>
-        <Input placeholder='Titulo' />
+        <Input placeholder='Titulo' id="title"/>
       </div>
     )
   }

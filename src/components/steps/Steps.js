@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
 import { Header,Button } from 'semantic-ui-react'
+import ModalSteps from '../modalSteps/ModalSteps'
+import $ from "jquery";
 
 export default class Steps extends Component {
-  state = {}
+  state = { modalStepsOpen: false }
+    openModal = (e) => {
+        this.setState({ modalStepsOpen: true });
+    }
+    closeModal = (e) => {
+        this.setState({ modalStepsOpen: false });
+    }
+    addStep= (e,step) =>{
+      var number = $("#steps").children().length;
+      $("#steps").append('<div class="ui segment">'+(number+1)+". "+step+'</div>')
+    }
   
   render() {
     return (<div>
         <Header as='h1'>Pasos</Header>       
-        <Button primary>Añadir paso</Button> 
+        <div id="steps"></div>
+        <Button primary onClick={this.openModal}>Añadir paso</Button> 
+        <ModalSteps open={this.state.modalStepsOpen} close={this.closeModal} addStep={this.addStep} />
       </div>
     )
   }

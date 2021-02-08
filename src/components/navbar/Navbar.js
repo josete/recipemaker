@@ -1,10 +1,35 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
+import $ from "jquery";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default class Navbar extends Component {
   state = {}
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+    switch (name) {
+      case "new":
+        const MySwal = withReactContent(Swal);
+        MySwal.fire({
+          title: '¿Seguro que quieres crear una nueva?',
+          text: "Todos los datos actuales se perderán.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $("#steps").empty()
+            $("#ingredients").empty()
+            $("#title").val("")
+          }
+        });        
+        break;
+    }
+  } //=> this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state

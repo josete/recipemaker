@@ -13,11 +13,11 @@ export default class Steps extends Component {
     }
     addStep= (e,step) =>{
       var number = $("#steps").children().length;
-      $("#steps").append('<div class="ui segment">'+(number+1)+". "+step+'</div>')
+      $("#steps").append('<div class="ui segment dataSegment">'+(number+1)+". "+step+'</div>')
     }
   
   render() {
-    return (<div>
+    return (<div class="data">
         <Header as='h1'>Pasos</Header>       
         <div id="steps"></div>
         <Button primary onClick={this.openModal}>Añadir paso</Button> 

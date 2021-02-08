@@ -5,9 +5,9 @@ export default class Title extends Component {
   state = {}
   
   render() {
-    return (<div>
+    return (<div class="data">
         <Header as='h1'>Titulo</Header>
-        <Input placeholder='Titulo' id="title"/>
+        <Input fluid placeholder='Titulo' id="title"/>
       </div>
     )
   }

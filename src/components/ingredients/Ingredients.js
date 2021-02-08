@@ -16,7 +16,7 @@ export default class Ingredients extends Component {
         console.log(qty+" "+units+" "+ingredient);
     }
     render() {
-        return (<div>
+        return (<div class="data">
             <Header as='h1'>Ingredientes</Header>
             <div id="ingredients"></div>
             <Button primary onClick={this.openModal}>Añadir ingrediente</Button>

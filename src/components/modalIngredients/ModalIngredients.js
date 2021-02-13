@@ -20,7 +20,9 @@ export default class ModalIndredients extends Component {
     }
     render() {
         const options = [
-            { key: 'gramos', text: 'gramos', value: 'gramos' }
+            { key: '', text: '', value: '' },
+            { key: 'gramos', text: 'gramos', value: 'gramos' },
+            { key: 'tbsp', text: 'tbsp', value: 'tbsp' }            
         ]
         return (<Modal id="registro" open={this.props.open} onClose={this.close} closeIcon closeOnDimmerClick>
             <Modal.Header>Ingrediente</Modal.Header>

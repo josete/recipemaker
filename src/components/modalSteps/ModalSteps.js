@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal, Icon, Input, Select, Grid } from 'semantic-ui-react'
+import { Button, Modal, Icon, Input} from 'semantic-ui-react'
 import $ from "jquery";
 
 export default class ModalSteps extends Component {

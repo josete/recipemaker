@@ -8,10 +8,10 @@ export default class Navbar extends Component {
   state = {}
 
   handleItemClick = (e, { name }) => {
+    const MySwal = withReactContent(Swal);
     this.setState({ activeItem: name })
     switch (name) {
-      case "new":
-        const MySwal = withReactContent(Swal);
+      case "new":        
         MySwal.fire({
           title: '¿Seguro que quieres crear una nueva?',
           text: "Todos los datos actuales se perderán.",
@@ -26,23 +26,37 @@ export default class Navbar extends Component {
             $("#ingredients").empty()
             $("#title").val("")
           }
-        });        
+        });
         break;
       case "generate":
         var title = $("#title").val();
         var category = $("#category")[0].innerText.toLowerCase();
         var ingredients = []
         var steps = []
-        var ingredientesDiv = document.getElementById("ingredients").childNodes;      
+        var ingredientesDiv = document.getElementById("ingredients").childNodes;
         ingredientesDiv.forEach(ingredient => {
-         ingredients.push("- "+ingredient.innerHTML)
+          ingredients.push("- " + ingredient.innerHTML)
         });
-        var stepsDiv = document.getElementById("steps").childNodes;      
+        var stepsDiv = document.getElementById("steps").childNodes;
         stepsDiv.forEach(step => {
-         steps.push("- "+step.innerHTML.split(".")[1].trim())
+          steps.push("- " + step.innerHTML.split(".")[1].trim())
         });
-        var postJson = {title:title,category:category,ingredientes:ingredients,pasos:steps}
-        console.log(postJson);
+        var postJson = { receta: { title: title, category: category, ingredientes: ingredients, pasos: steps } }
+        $.ajax({
+          url: "http://localhost:3001/recipe/",
+          type: "POST",
+          crossDomain: true,
+          data: postJson
+        }).done(function(data, statusText, xhr){
+          var status = xhr.status;          
+          if (status===200){
+            MySwal.fire(
+              'Receta guardada',
+              "",              
+              'success'
+            )
+          }          
+        });
         break;
     }
   }

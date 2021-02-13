@@ -30,28 +30,22 @@ export default class Navbar extends Component {
         break;
       case "generate":
         var title = $("#title").val();
+        var category = $("#category")[0].innerText.toLowerCase();
         var ingredients = []
         var steps = []
         var ingredientesDiv = document.getElementById("ingredients").childNodes;      
         ingredientesDiv.forEach(ingredient => {
-         ingredients.push(ingredient.innerHTML)
+         ingredients.push("- "+ingredient.innerHTML)
         });
         var stepsDiv = document.getElementById("steps").childNodes;      
         stepsDiv.forEach(step => {
-         steps.push(step.innerHTML)
+         steps.push("- "+step.innerHTML.split(".")[1].trim())
         });
-        console.log("title: "+title);
-        console.log("ingredientes:");
-        ingredients.forEach(ing => {
-          console.log("- "+ing);
-        });
-        console.log("pasos:");
-        steps.forEach(st => {
-          console.log("- "+st.split(".")[1].trim());
-        });
+        var postJson = {title:title,category:category,ingredientes:ingredients,pasos:steps}
+        console.log(postJson);
         break;
     }
-  } //=> this.setState({ activeItem: name })
+  }
 
   render() {
     const { activeItem } = this.state

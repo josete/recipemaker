@@ -13,7 +13,6 @@ export default class Ingredients extends Component {
     }
     addIngredient = (e,qty,units,ingredient) =>{
        $("#ingredients").append('<div class="ui segment">'+qty+" "+units+" "+ingredient+'</div>')
-        console.log(qty+" "+units+" "+ingredient);
     }
     render() {
         return (<div class="data">
